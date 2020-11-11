@@ -1,7 +1,7 @@
 # OCR class to use the OCP Api
 import base64
 import json
-
+import os
 import requests
 from PIL import Image
 
@@ -19,15 +19,16 @@ class MyEncoder(json.JSONEncoder):
 # class for request the card analysis
 class OCR(object):
     # need a key
-    def __init__(self, key):
+    def __init__(self, key, photo):
         self.key = key
+        self.photo = photo
 
     def remote_call(self):
         # you owen key
         url = 'http://api.hanvon.com/rt/ws/v1/ocr/bcard/recg?key=%s&code=cf22e3bb-d41c-47e0-aa44-a92984f5829d' % self.key
         print(url)
         base64img = ""
-        img = Image.open('your_card.jpg')
+        img = Image.open(self.photo)
         img = img.convert('L')
         _w = img.width
         _h = img.height
@@ -42,4 +43,6 @@ class OCR(object):
         headers = {"Content-Type": "application/json"}
         resp = requests.post(url, data=json.dumps(data, cls=MyEncoder, indent=4), headers=headers)
         # print(resp.text)
+        # delete the cart_gray.jpg
+        os.remove('card_gray.jpg')
         return resp.json()
