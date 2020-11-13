@@ -3,15 +3,13 @@ from phone import Phone
 
 
 class PhoneSearch(object):
-    def __init__(self, number):
-        self.number = number
 
-    def search(self):
+    def search(self, number):
         ph = Phone()
-        city = ph.find(self.number)
+        city = ph.find(number)
 
         print(city)  # 所有信息
-        print('手机号：' + self.number)
+        print('手机号：' + number)
         print('所属省份：' + city['province'])
         print('所属市区：' + city['city'])
         print('邮    编：' + city['zip_code'])
