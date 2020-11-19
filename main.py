@@ -5,16 +5,13 @@ from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
+from DatabaseManager import DatabaseManager
 from GUI.DataWash import Data_Wash
 from GUI.FirstEdition import Ui_main_Form
 from GUI.QueryPageOperate import UI_program_query_person_op
 from ToolClasses import OCR
-from DatabaseManager import DatabaseManager
-from GUI import DatabaseOperate
-from GUI import DataWash
-from GUI import FirstEdition
-from GUI import QueryPageOperate
-from GUI import UIQuery
+from ToolClasses import PyechartsGenerator
+from GUI import VisualizeData
 
 class UI_program_main_op(QWidget):
     def __init__(self, database_manager, parent=None):
@@ -65,6 +62,11 @@ class UI_program_main_op(QWidget):
 
     def visualize_data(self):
         print("数据可视化发方法")
+        PyechartsGenerator.PieChart().GetPie()
+        app = QApplication(sys.argv)
+        ex = VisualizeData()
+        ex.show()
+        sys.exit(app.exec_())
 
     def exit_program(self):
         sender = self.sender()

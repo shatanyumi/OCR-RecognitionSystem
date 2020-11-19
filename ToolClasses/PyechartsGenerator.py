@@ -12,6 +12,8 @@ CurrentConfig.ONLINE_HOST = "https://cdn.bootcdn.net/ajax/libs/echarts/5.0.0-bet
 
 class PieChart(object):
 
+    def __init__(self):
+        print('started')
     # start the web server , and get the html files or pictures
 
     def GetPie(self):

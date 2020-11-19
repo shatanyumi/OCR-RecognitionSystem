@@ -1,7 +1,7 @@
 # This is a sample Python script.
 
 import ToolClasses.PyechartsGenerator as p
-from DatabaseManager import DatabaseManagerBackup as dm
+from DatabaseManager import DatabaseManager as dm
 import time
 from ToolClasses import PhoneSearch as ps
 
