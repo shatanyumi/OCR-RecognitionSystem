@@ -18,7 +18,7 @@ class PieChart(object):
         provinces = {}
         # Instantiate a phone search
         getCity = ps.PhoneSearch()
-        frames = dm.DatabaseManager('lab.db').get_all()
+        frames = dm.DatabaseManager('system.db').get_all()
         print(frames)
         for row in frames.itertuples():
             telephone = getattr(row, 'telephone')
@@ -34,6 +34,7 @@ class PieChart(object):
         # attr = ["河北", "山西", "辽宁", "吉林", "黑龙江", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东",
         #         "海南", "四川", "贵州", "云南", "陕西", "甘肃", "青海", "台湾", "内蒙古", "广西", "西藏", "宁夏",
         #         "新疆", "北京", "天津", "上海", "重庆", "香港", "澳门"]
+
         attr = list(provinces.keys())
         v1 = list(provinces.values())
         print(attr)
@@ -45,11 +46,4 @@ class PieChart(object):
             title_opts=opts.TitleOpts(title="人数省份分布饼图"),
             legend_opts=opts.LegendOpts(pos_left="78%")
         ).set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}")))
-        pie.render("lab.html")
-        # c = (
-        #     Pie()
-        #         .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
-        #         .set_global_opts(title_opts=opts.TitleOpts(title="Pie-基本示例"))
-        #         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
-        #         .render("pie_base.html")
-        # )
+        pie.render("system.html")

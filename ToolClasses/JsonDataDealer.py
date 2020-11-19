@@ -1,6 +1,6 @@
 # Json Data Dealer to deal the json, and return the data
 
-from DatabaseManager import DatabaseManager as dm
+from DatabaseManager import DatabaseManagerBackup as dm
 
 
 class JsonDataDealer(object):
