@@ -20,10 +20,12 @@ class PieChart(object):
         provinces = {}
         # Instantiate a phone search
         getCity = ps.PhoneSearch()
-        frames = dm.DatabaseManager('system.db').get_all()
+        databaseManager = dm.DatabaseManager('system.db')
+        databaseManager.set_tablename('peoples')
+        frames = databaseManager.get_all()
         print(frames)
         for row in frames.itertuples():
-            telephone = getattr(row, 'telephone')
+            telephone = getattr(row, 'tel')
             print(telephone)
             city = getCity.search(telephone)
             print(city)

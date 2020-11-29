@@ -1,9 +1,12 @@
+import os
+import sys
+
 from PyQt5.QtCore import QUrl
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-from PyQt5.QtWidgets import QFrame, QHBoxLayout
-import os
+from PyQt5.QtWidgets import QFrame, QHBoxLayout, QApplication, QWidget
 
-class VisulizeData(object):
+
+class VisualizeData(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -18,11 +21,17 @@ class VisulizeData(object):
         self.mainhboxLayout.addWidget(self.frame)
         self.hboxLayout = QHBoxLayout(self.frame)
 
-
         self.myHtml = QWebEngineView()
         file = os.path.abspath('system.html')
-        self.myHtml.load(QUrl('file:///'+file))
+        print('file:///' + file)
+        self.myHtml.load(QUrl('file:///' + file))
 
         self.hboxLayout.addWidget(self.myHtml)
         self.setLayout(self.mainhboxLayout)
 
+
+if __name__ == '__main__':
+    App = QApplication(sys.argv)
+    ex = VisualizeData()
+    ex.show()
+    sys.exit(App.exec_())

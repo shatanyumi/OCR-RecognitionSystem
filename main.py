@@ -1,7 +1,8 @@
 import sys
 
-from PIL.Image import Image
+from PIL import Image
 from PyQt5 import QtCore
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 
@@ -9,25 +10,28 @@ from DatabaseManager import DatabaseManager
 from GUI.DataWash import Data_Wash
 from GUI.FirstEdition import Ui_main_Form
 from GUI.QueryPageOperate import UI_program_query_person_op
-from ToolClasses import OCR
+from GUI.VisualizeData import VisualizeData
 from ToolClasses import PyechartsGenerator
-from GUI import VisualizeData
+from ToolClasses.OCR import OCR
 
-class UI_program_main_op(QWidget):
+
+class UIProgramMainOperation(QWidget):
     def __init__(self, database_manager, parent=None):
-        super(UI_program_main_op, self).__init__(parent)
+        super(UIProgramMainOperation, self).__init__(parent)
         self.ui_main = Ui_main_Form()
         self.ui_main.setupUi(self)
         self.database_manager = database_manager
 
     def load_picture(self):
         print("load--file")
-        fname, _ = QFileDialog.getOpenFileName(self, '选择图片', 'c:\\', 'Image files(*.jpg *.gif *.png)')
+        fname, _ = QFileDialog.getOpenFileName(self, '选择图片', 'c:\\', 'Image files(*.jpg *.gif *.png *jpeg)')
         if fname == "":
+            print("can not open the picture!")
             return
-        pixmax = QPixmap(fname)
-        scarepixmap = pixmax.scaled(100, 100, aspectRatioMode=Qt.KeepAspectRatio)
-        self.ui_main.label.setPixmap(scarepixmap)
+        pixMax = QPixmap(fname)
+        scarePixMap = pixMax.scaled(100, 100, aspectRatioMode=Qt.KeepAspectRatio)
+        self.ui_main.label.setPixmap(scarePixMap)
+        print(fname)
         img = Image.open(fname)
         # 通过OCR类获取到字典
         json_result = OCR('5aba1bb3-ffef-4c5b-ad93-974d406edd49', img).remote_call()
@@ -63,22 +67,20 @@ class UI_program_main_op(QWidget):
     def visualize_data(self):
         print("数据可视化发方法")
         PyechartsGenerator.PieChart().GetPie()
-        app = QApplication(sys.argv)
-        ex = VisualizeData()
-        ex.show()
-        sys.exit(app.exec_())
+        self.ex = VisualizeData()
+        self.ex.show()
 
     def exit_program(self):
         sender = self.sender()
-        app = QApplication.instance()
-        app.quit()
+        App = QApplication.instance()
+        App.quit()
 
 
 if __name__ == '__main__':
-    database_manager = DatabaseManager.DatabaseManager('system.db')
-    database_manager.set_tablename('peoples')
+    databaseManager = DatabaseManager.DatabaseManager('system.db')
+    databaseManager.set_tablename('peoples')
     QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
-    program = UI_program_main_op(database_manager)
+    program = UIProgramMainOperation(databaseManager)
     program.show()
     sys.exit(app.exec_())
