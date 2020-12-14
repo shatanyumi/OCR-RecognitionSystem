@@ -14,7 +14,13 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtGui import *
 from PyQt5.QtGui import QIcon
 
-# ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")
+# 环境适配
+if platform.system().lower() == 'windows':
+    print("windows")
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")
+elif platform.system().lower() == 'linux':
+    print("linux")
+    
 from PyQt5.QtWidgets import QApplication
 
 
