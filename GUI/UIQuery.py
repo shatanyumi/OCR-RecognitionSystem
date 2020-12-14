@@ -14,48 +14,48 @@ from PyQt5 import QtCore, QtWidgets
 class Ui_query_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(829, 416)
-        self.label_14 = QtWidgets.QLabel(Form)
-        self.label_14.setGeometry(QtCore.QRect(380, 0, 54, 21))
-        self.label_14.setObjectName("label_14")
+        #Form.resize(829, 400)
         self.layoutWidget = QtWidgets.QWidget(Form)
-        self.layoutWidget.setGeometry(QtCore.QRect(10, 30, 801, 181))
+        self.layoutWidget.setGeometry(QtCore.QRect(0, 10, 830, 300))
         self.layoutWidget.setObjectName("layoutWidget")
+
         self.gridLayout = QtWidgets.QGridLayout(self.layoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.label_3 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_3.setObjectName("label_3")
-        self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
-        self.label_2 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_2.setObjectName("label_2")
-        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
-        self.label = QtWidgets.QLabel(self.layoutWidget)
-        self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
+
         self.pushButton = QtWidgets.QPushButton(self.layoutWidget)
         self.pushButton.setObjectName("pushButton")
         self.gridLayout.addWidget(self.pushButton, 1, 3, 1, 1)
+
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
+
         self.pushButton_2 = QtWidgets.QPushButton(self.layoutWidget)
         self.pushButton_2.setObjectName("pushButton_2")
         self.verticalLayout.addWidget(self.pushButton_2)
+
         self.pushButton_3 = QtWidgets.QPushButton(self.layoutWidget)
         self.pushButton_3.setObjectName("pushButton_3")
         self.verticalLayout.addWidget(self.pushButton_3)
+
         self.pushButton_5 = QtWidgets.QPushButton(self.layoutWidget)
         self.pushButton_5.setObjectName("pushButton_5")
         self.verticalLayout.addWidget(self.pushButton_5)
+
         self.label_4 = QtWidgets.QLabel(self.layoutWidget)
         self.label_4.setObjectName("label_4")
         self.verticalLayout.addWidget(self.label_4)
+
         self.gridLayout.addLayout(self.verticalLayout, 2, 3, 1, 1)
         self.lineEdit = QtWidgets.QLineEdit(self.layoutWidget)
         self.lineEdit.setObjectName("lineEdit")
+        self.lineEdit.setPlaceholderText("请输入搜索值")
+
         self.gridLayout.addWidget(self.lineEdit, 1, 1, 1, 2)
         self.comboBox = QtWidgets.QComboBox(self.layoutWidget)
         self.comboBox.setObjectName("comboBox")
+        self.comboBox.setAccessibleDescription('请选择搜索属性')
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.comboBox.addItem("")
@@ -68,44 +68,57 @@ class Ui_query_Form(object):
         self.tableWidget = QtWidgets.QTableWidget(self.layoutWidget)
         self.tableWidget.setObjectName("tableWidget")
         self.gridLayout.addWidget(self.tableWidget, 2, 1, 1, 1)
-        self.label_5 = QtWidgets.QLabel(Form)
-        self.label_5.setGeometry(QtCore.QRect(380, 230, 54, 12))
-        self.label_5.setObjectName("label_5")
+
         self.layoutWidget1 = QtWidgets.QWidget(Form)
-        self.layoutWidget1.setGeometry(QtCore.QRect(90, 260, 631, 141))
+        self.layoutWidget1.setGeometry(QtCore.QRect(0, 320, 730, 139))
         self.layoutWidget1.setObjectName("layoutWidget1")
+
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+
         self.textBrowser = QtWidgets.QTextBrowser(self.layoutWidget1)
         self.textBrowser.setObjectName("textBrowser")
         self.verticalLayout_2.addWidget(self.textBrowser)
-        self.pushButton_4 = QtWidgets.QPushButton(self.layoutWidget1)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.verticalLayout_2.addWidget(self.pushButton_4)
+
 
         self.retranslateUi(Form)
+        Form.setWindowOpacity(0.9)  # 设置窗口透明度
+
+        qssStyle = '''
+            QPushButton[name="btn_1"],[name="btn_2"],[name="btn_3"],[name="btn_5"],[name="btn_4"]{
+                background-color:white;
+                border-radius:4px;
+                font:12px;
+                color:#004271;
+                padding:4px;
+            }
+            QPushButton[name="btn_1"]:hover,[name="btn_2"]:hover,[name="btn_3"]:hover,[name="btn_5"]:hover,[name="btn_4"]:hover{
+                color:white;
+                background-color:#478AFC;
+            }
+        '''
+        Form.setStyleSheet(qssStyle)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "信息查询与修改"))
-        self.label_14.setText(_translate("Form", "查询信息："))
-        self.label_3.setText(_translate("Form", "显示结果："))
-        self.label_2.setText(_translate("Form", "输入查询值："))
-        self.label.setText(_translate("Form", "选择属性："))
+        Form.setWindowTitle(_translate("Form", "信息管理"))
         self.pushButton.setText(_translate("Form", "查询"))
-        self.pushButton_2.setText(_translate("Form", "删除信息"))
-        self.pushButton_3.setText(_translate("Form", "保存信息变动"))
-        self.pushButton_5.setText(_translate("Form", "创建一条新信息"))
-        self.label_4.setText(_translate("Form", "TextLabel"))
+        self.pushButton.setProperty('name', 'btn_1')
+        self.pushButton_2.setText(_translate("Form", "删除"))
+        self.pushButton_2.setProperty('name', 'btn_2')
+        self.pushButton_3.setText(_translate("Form", "保存修改"))
+        self.pushButton_3.setProperty('name', 'btn_3')
+        self.pushButton_5.setText(_translate("Form", "新建联系人"))
+        self.pushButton_5.setProperty('name', 'btn_5')
+        self.label_4.setText(_translate("Form", ""))
         self.comboBox.setItemText(0, _translate("Form", "name"))
-        self.comboBox.setItemText(1, _translate("Form", "mobile"))
+        self.comboBox.setItemText(1, _translate("Form", "tel"))
         self.comboBox.setItemText(2, _translate("Form", "title"))
         self.comboBox.setItemText(3, _translate("Form", "comp"))
         self.comboBox.setItemText(4, _translate("Form", "addr"))
         self.comboBox.setItemText(5, _translate("Form", "tel"))
         self.comboBox.setItemText(6, _translate("Form", "email"))
         self.comboBox.setItemText(7, _translate("Form", "fax"))
-        self.label_5.setText(_translate("Form", "信息提示："))
-        self.pushButton_4.setText(_translate("Form", "退出"))
+

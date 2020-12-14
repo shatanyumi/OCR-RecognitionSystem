@@ -45,9 +45,9 @@ class PieChart(object):
         print(v1)
         print(provinces)
         pie = (Pie().add(
-            "", [list(z) for z in zip(attr, v1)], center=["35%", "50%"]
+            "", [list(z) for z in zip(attr, v1)], center=["30%", "40%"],radius=[0,100]
         ).set_global_opts(
             title_opts=opts.TitleOpts(title="人数省份分布饼图"),
-            legend_opts=opts.LegendOpts(pos_left="78%")
+            legend_opts=opts.LegendOpts(pos_left="20%")
         ).set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}")))
         pie.render("system.html")

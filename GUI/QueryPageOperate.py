@@ -1,8 +1,11 @@
 import sys
 
+import pyqtgraph as pg
+import qdarkstyle
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QApplication, QWidget
 
 from GUI.UIQuery import Ui_query_Form
 
@@ -10,6 +13,9 @@ from GUI.UIQuery import Ui_query_Form
 class UI_program_query_person_op(QWidget):
     def __init__(self, database, parent=None):
         super(UI_program_query_person_op, self).__init__(parent)
+        pg.setConfigOption('background', '#19232D')
+        pg.setConfigOption('foreground', 'd')
+        pg.setConfigOptions(antialias=True)
         self.ui_query = Ui_query_Form()
         self.ui_query.setupUi(self)
         self.ui_query.tableWidget.setColumnCount(7)
@@ -17,15 +23,15 @@ class UI_program_query_person_op(QWidget):
         self.ui_query.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)  # 设置表格的选取方式是行选取
         self.ui_query.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)  # 设置选取方式为单个选取
         self.ui_query.tableWidget.setHorizontalHeaderLabels(
-            ["name", "title", "tel", "email", "comp", "addr", "id"])  # 设置行表头
+            ["名字", "头衔", "手机", "邮箱", "公司", "地址", "编号"])  # 设置行表头
         self.ui_query.tableWidget.horizontalHeader().setVisible((True))
         self.ui_query.tableWidget.verticalHeader().setVisible(True)  # 隐藏列表头
         self.ui_query.pushButton.clicked.connect(self.query_button)
         self.ui_query.pushButton_2.clicked.connect(self.delete_button)
         self.ui_query.pushButton_3.clicked.connect(self.save_change)
-        self.ui_query.pushButton_4.clicked.connect(self.exit_program)
         self.ui_query.pushButton_5.clicked.connect(self.add_one)
         self.database = database
+        self.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
 
         self.new_sig = False
 
@@ -137,7 +143,7 @@ class UI_program_query_person_op(QWidget):
 
         new_data = dict(name=name,
                         title=title,
-                        tel=tel,
+                        mobile=tel,
                         email=email,
                         comp=comp,
                         addr=addr,

@@ -21,7 +21,7 @@ class DatabaseManager(object):
     def store_json(self, data):
         data_id = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
         tmp = json.loads(data)
-        frame = pd.DataFrame([(tmp['name'][0], tmp['title'][0], tmp['tel'][0], tmp['email'][0], tmp['comp'][0],
+        frame = pd.DataFrame([(tmp['name'][0], tmp['title'][0], tmp['mobile'][0], tmp['email'][0], tmp['comp'][0],
                                tmp['addr'][0], data_id)],
                              columns=['name', 'title', 'tel', 'email', 'comp', 'addr', 'id'])
         frame.to_sql(self.table_name, con=self.engine, index=False, if_exists='append')
@@ -33,7 +33,7 @@ class DatabaseManager(object):
         # print(data)
         data_id = time.strftime('%Y%m%d%H%M%S', time.localtime(time.time()))
         frame = pd.DataFrame(
-            [(data['name'], data['title'], data['tel'], data['email'], data['comp'],
+            [(data['name'], data['title'], data['mobile'], data['email'], data['comp'],
               data['addr'], data_id)],
             columns=['name', 'title', 'tel', 'email', 'comp', 'addr', 'id'])
         frame.to_sql(self.table_name, con=self.engine, index=False, if_exists='append')

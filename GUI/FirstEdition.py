@@ -9,43 +9,37 @@
 
 
 from PyQt5 import QtCore, QtWidgets
+from GUI.QueryPageOperate import UI_program_query_person_op
+from PyQt5.QtWidgets import QStackedLayout
+import qdarkstyle
 
 
-class Ui_main_Form(object):
+class Ui_Load_Picture_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(400, 400)
+        Form.resize(800, 800)
+
         self.widget = QtWidgets.QWidget(Form)
-        self.widget.setGeometry(QtCore.QRect(70, 30, 282, 354))
+        self.widget.setGeometry(QtCore.QRect(0, 30, 282, 354))
+        self.widget.resize(300, 400)
         self.widget.setObjectName("widget")
+
         # self.setWindowTitle('实验程序')
         self.gridLayout = QtWidgets.QGridLayout(self.widget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
 
-        # 查询联系人按钮
-        self.pushButton_3 = QtWidgets.QPushButton(self.widget)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout.addWidget(self.pushButton_3, 3, 0, 1, 1)
-
-        # 退出程序
-        self.pushButton_2 = QtWidgets.QPushButton(self.widget)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout.addWidget(self.pushButton_2, 4, 0, 1, 2)
 
         # 显示文本的框
         self.textBrowser = QtWidgets.QTextBrowser(self.widget)
         self.textBrowser.setObjectName("textBrowser")
         self.gridLayout.addWidget(self.textBrowser, 2, 0, 1, 2)
 
-        # 数据可视化按钮
-        self.pushButton_4 = QtWidgets.QPushButton(self.widget)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.gridLayout.addWidget(self.pushButton_4, 3, 1, 1, 1)
+
 
         # 显示图片的label
         self.label = QtWidgets.QLabel(self.widget)
-        self.label.setMinimumSize(QtCore.QSize(10, 60))
+        self.label.setMinimumSize(QtCore.QSize(40, 60))
         self.label.setObjectName("label")
         self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
 
@@ -57,16 +51,32 @@ class Ui_main_Form(object):
         self.retranslateUi(Form)
 
         self.pushButton.clicked.connect(Form.load_picture)
-        self.pushButton_3.clicked.connect(Form.query_person)
-        self.pushButton_4.clicked.connect(Form.visualize_data)
-        self.pushButton_2.clicked.connect(Form.exit_program)
+        Form.setWindowOpacity(0.9)  # 设置窗口透明度
+        #Form.setWindowFlag(QtCore.Qt.FramelessWindowHint) # 隐藏边框
+
+        qssStyle = '''
+            QPushButton[name="btn"]:hover{
+                background-color:#478AFC;
+                border-radius:4px;
+                font:bold 12px;
+                padding:6px;
+                color:#004271;
+            }
+            QLabel[name="label"]{
+                color:#004271;
+                font:bold 13px;
+            }
+
+        '''
+        Form.setStyleSheet(qssStyle)
+
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "名片识别系统"))
-        self.pushButton_3.setText(_translate("Form", "查询联系人"))
-        self.pushButton_2.setText(_translate("Form", "退出程序"))
-        self.pushButton_4.setText(_translate("Form", "数据可视化"))
+
         self.label.setText(_translate("Form", "piclabel"))
+        self.label.setProperty('name', 'label')
         self.pushButton.setText(_translate("Form", "选择上传图片"))
+        self.pushButton.setProperty('name', 'btn')
