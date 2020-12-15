@@ -49,6 +49,7 @@ class UIProgramMainOperation(QMainWindow):
     def visualize_data(self):
         print("数据可视化发方法")
         PyechartsGenerator.PieChart().GetPie()
+        self.ui_main.visual_form.mainLayout()
         self.ui_main.widget2.stacked_layout.setCurrentIndex(1)
 
     def exit_program(self):
