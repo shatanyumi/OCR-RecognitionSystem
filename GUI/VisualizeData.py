@@ -22,6 +22,7 @@ class VisualizeData(QWidget):
         self.setWindowTitle("中国各省人口")
 
     def mainLayout(self):
+        PyechartsGenerator.PieChart().GetPie()
         self.mainhboxLayout = QHBoxLayout(self)
         self.frame = QFrame(self)
         self.mainhboxLayout.addWidget(self.frame)
