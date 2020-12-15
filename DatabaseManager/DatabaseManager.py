@@ -42,7 +42,7 @@ class DatabaseManager(object):
     # update a data by id
     def update(self, data):
         sql = "update %s set name='%s' , title='%s', tel='%s', email='%s', comp='%s', addr='%s' where id=%s" % (
-            self.table_name, data['name'], data['title'], data['tel'], data['email'], data['comp'], data['addr'],
+            self.table_name, data['name'], data['title'], data['mobile'], data['email'], data['comp'], data['addr'],
             data['id'])
         self.engine.execute(sql)
 
